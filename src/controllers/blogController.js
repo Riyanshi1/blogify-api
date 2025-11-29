@@ -1,12 +1,9 @@
-export function getAllBlogs(req, res) {
+const getAllPosts = (req, res) => {
   res.status(200).json({
-    message: "All blogs fetched successfully!",
+    message: 'Route handled by postController.getAllPosts',
   });
-}
+};
 
-export function createBlog(req, res) {
-  res.status(201).json({
-    message: "Blog created successfully!",
-    data: req.body
-  });
-}
+module.exports = {
+  getAllPosts,
+};
