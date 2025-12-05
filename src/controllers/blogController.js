@@ -6,23 +6,27 @@ const posts = [
   { id: 2, title: 'Second Post', content: 'This is the second post.' },
 ];
 
-// GET /api/v1/posts → get all posts
-const getAllPosts = async (req, res) => {
+const getAllPosts = (req, res) => {
   res.status(200).json({
-    message: 'Fetching all posts',
-    data: posts,
+    success: true,
+    data: {
+      message: "All posts fetched successfully"
+    }
   });
 };
 
-// GET /api/v1/posts/:postId → dynamic route
-const getPostById = async (req, res) => {
-  const postId = req.params.postId; // capture the URL parameter
+const getPostById = (req, res) => {
+  const { id } = req.params;
 
-  // For the assignment, we only need to return the ID.
-  return res.status(200).json({
-    message: `Fetching data for post with ID: ${postId}`,
+  res.status(200).json({
+    success: true,
+    data: {
+      postId: id
+    }
   });
 };
+
+
 
 module.exports = {
   getAllPosts,
