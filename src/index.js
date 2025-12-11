@@ -1,17 +1,24 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const PORT = 3000;
 
-// import the router
-const postRouter = require('./routes/blogRoutes');
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the Blogify API!');
+// Import the master router
+const mainRouter = require("./routes/index");
+
+// Mount versioned API
+app.use("/api/v1", mainRouter);
+
+// Health check route (optional)
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Blogify API is running",
+  });
 });
 
-// mount the router
-app.use('/api/v1/posts', postRouter);
-
+// Start server
+const PORT = 8000;
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}/`);
+  console.log(`Server running on port ${PORT}`);
 });
